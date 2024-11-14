@@ -1,0 +1,26 @@
+Bootstrap: docker
+From: osrf/ros:noetic-desktop-full-bionic  # ROS Noetic with Ubuntu 18.04 base
+
+%post
+    # Update and install necessary dependencies
+    apt-get update && apt-get install -y \
+        python3-pip \
+        curl \
+        build-essential
+
+    # Installing Python dependencies
+    pip3 install -r /src/backend/requirements.txt # Can change it later, different repos put it in different places.
+ 
+    # Install Node.js (for JavaScript frontend handling)
+    curl -sL https://deb.nodesource.com/setup_14.x | bash -
+    apt-get install -y nodejs
+
+%environment
+    # Set any environment variables required
+    export ROS_PACKAGE_PATH=/opt/ros/noetic/share
+
+%runscript
+    # Define the startup command
+    exec python3 src/backend/main.py  # Update with your actual Python script
+
+# Not tested just a quickstart for us to look at and discuss. 
