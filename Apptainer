@@ -9,7 +9,7 @@ From: osrf/ros:noetic-desktop-full-bionic  # ROS Noetic with Ubuntu 18.04 base
         build-essential
 
     # Installing Python dependencies
-    pip3 install -r /src/backend/requirements.txt # Can change it later, different repos put it in different places.
+    pip3 install -r /requirements.txt # Can change it later, different repos put it in different places.
  
     # Install Node.js (for JavaScript frontend handling)
     curl -sL https://deb.nodesource.com/setup_14.x | bash -
