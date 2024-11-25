@@ -1,0 +1,11 @@
+.sidebar {
+    height: 92vh; /* Subtract the height of the navbar */
+    width: 15vw;
+    left: -15vw; /* Hide off-screen */
+    position: fixed;
+    background-color: #212121;
+    transition: left 0.3s ease;  /* Animate the slide-in effect */
+}
+.sidebar.open {
+    left: 0;  /* Slide in to 0 position */
+}
