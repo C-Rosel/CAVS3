@@ -2,13 +2,14 @@
 
 import React, {useState} from 'react'
 import msstateLogo from '../../assets/msstate-logo.png'
+import { IoSettingsSharp } from "react-icons/io5";
 import './Navbar.css'
 
 const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
     return (
         <nav className="navbar">
             <div className="navbar-container">
-                {/* Left side: Hamburger icon and Logo */}
+                {/* Left side: Hamburger icon, Logo, Title */}
                 <div className="navbar-left">
                     <div
                         onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -23,8 +24,9 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
                     <span className="navbar-title">Dashboard</span>
                 </div>
 
+                {/* Left side: Connectivity Info, Settings Icon */}
                 <div className="navbar-right">
-                    <span>settings</span>
+                    <IoSettingsSharp className="settings-icon" size={45}/>
                 </div>
             </div>
         </nav>

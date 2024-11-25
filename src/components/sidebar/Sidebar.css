@@ -1,5 +1,5 @@
 .sidebar {
-    height: 92vh; /* Subtract the height of the navbar */
+    height: 93vh; /* Subtract the height of the navbar */
     width: 15vw;
     left: -15vw; /* Hide off-screen */
     position: fixed;
@@ -8,4 +8,17 @@
 }
 .sidebar.open {
     left: 0;  /* Slide in to 0 position */
+}
+
+.sidebarBtn {
+    height: 10vh;
+    border-bottom: 3px solid white;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+.sidebarBtn:hover {
+    background-color: #383838;
+}
+.sidebarBtn:active {
+    transform: scale(0.98);
+    background-color: #4a4a4a;
 }
