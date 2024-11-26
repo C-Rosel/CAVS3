@@ -1,7 +1,7 @@
 .sidebar {
     height: 93vh; /* Subtract the height of the navbar */
-    width: 15vw;
-    left: -15vw; /* Hide off-screen */
+    width: 260px;
+    left: -260px; /* Hide off-screen */
     position: fixed;
     background-color: #212121;
     transition: left 0.3s ease;  /* Animate the slide-in effect */
@@ -14,11 +14,19 @@
     height: 10vh;
     border-bottom: 3px solid white;
     transition: background-color 0.3s ease, transform 0.1s ease;
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    cursor: pointer;
+}
+.sidebarBtn * {
+    margin-left: 25px;
+    margin-right: 25px;
 }
 .sidebarBtn:hover {
     background-color: #383838;
 }
 .sidebarBtn:active {
-    transform: scale(0.98);
+    transform: scale(0.96);
     background-color: #4a4a4a;
 }

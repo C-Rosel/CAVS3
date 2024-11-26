@@ -13,7 +13,7 @@
 
 /* Main content area */
 .main-content {
-  flex-grow: 1;
+  /* flex-grow: 1; */
   /* Smooth transition for content shift */
   transition: margin-left 0.3s ease; 
   padding: 20px;
@@ -23,5 +23,5 @@
 /* Shift content to the right when sidebar is open */
 .main-content.shifted {
   /* Push the content to the right by the width of the sidebar */
-  margin-left: 15vw; 
+  margin-left: 260px; 
 }
