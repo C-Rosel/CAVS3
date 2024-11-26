@@ -1,8 +1,26 @@
-# React + Vite
+Human-Computer Interactions Project Fall 2025 Team: CAVS 3
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is an application to interface with ROS topics running on CAVS vehicles for viewing purposes.
 
-Currently, two official plugins are available:
+# Instructions to run front-end locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Requirements:
+Node: v16.20.2
+Npm: 8.19.4
+
+1. **Clone the Repository**
+   ```
+   git clone https://github.com/your-username/your-repo-name.git
+   ```
+
+2. **Navigate to the project directory**
+
+3. **Install dependencies**
+   ```
+   npm install
+   ```
+
+3. **Run the app**
+   ```
+   npm run dev
+   ```
