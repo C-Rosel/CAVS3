@@ -5,7 +5,7 @@ import msstateLogo from '../../assets/msstate-logo.png'
 import { IoSettingsSharp } from "react-icons/io5";
 import './Navbar.css'
 
-const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
+const Navbar = ({ sidebarOpen, setSidebarOpen, settingsOpen, setSettingsOpen }) => {
     return (
         <nav className="navbar">
             <div className="navbar-container">
@@ -26,7 +26,11 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
 
                 {/* Left side: Connectivity Info, Settings Icon */}
                 <div className="navbar-right">
-                    <IoSettingsSharp className="settings-icon" size={45}/>
+                    <IoSettingsSharp 
+                        className="settings-icon" 
+                        size={45}
+                        onClick={() => setSettingsOpen(!settingsOpen)}
+                    />
                 </div>
             </div>
         </nav>

@@ -1,11 +1,10 @@
 import React from 'react';
 import './ModulePanel.css'
 
-const ModulePanel = ({ title, content, onClick, onClose }) => {
+const ModulePanel = ({ title, content, onClose }) => {
   return (
     <div
       className="module-panel"
-      onClick={onClick}
     >
         <div className="m-panel-header">
             <div className="m-panel-title">{title}</div>

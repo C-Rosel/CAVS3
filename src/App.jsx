@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Navbar from './components/navbar/Navbar'
 import Sidebar from './components/sidebar/Sidebar'
+import Settings from './components/settings/Settings'
 import GPS from './pages/GPS'
 import Camera from './pages/Camera'
 import Sensors from './pages/Sensors'
@@ -11,6 +12,7 @@ import './App.css'
 
 const App = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const [activePage, setActivePage] = useState("Camera");
 
     // Render the correct component based on activePage
@@ -29,11 +31,20 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <Navbar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
-      <Sidebar sidebarOpen={sidebarOpen} activePage={activePage} setActivePage={setActivePage}/>
+      <Navbar 
+        sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} 
+        settingsOpen={settingsOpen} setSettingsOpen={setSettingsOpen}
+      />
+      <Sidebar 
+        sidebarOpen={sidebarOpen} 
+        activePage={activePage} setActivePage={setActivePage}
+      />
+      <Settings 
+        settingsOpen={settingsOpen} 
+      />
 
       {/* Main Content */}
-      <div className={`main-content ${sidebarOpen ? 'shifted' : ''}`}>
+      <div className={`main-content ${sidebarOpen ? 'sidebar-shifted' : ''} ${settingsOpen ? 'settings-shifted' : ''}`}>
         {renderPage()}
       </div>
     </div>

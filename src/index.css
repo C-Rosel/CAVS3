@@ -11,6 +11,27 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+
+  /* GLOBAL COLORS */
+  --msstate-maroon: #5D1725;
+
+  /* Default (Dark Mode) Colors */
+  --background-color: #0F0F0F;
+  --text-color: white;
+  --primary-color: #212121;
+  --btn-hover-color: #383838;
+  --btn-click-color: #4a4a4a;
+}
+
+/* Light Mode Colors */
+[data-theme="light"] {
+  --background-color: #c2c2c2;
+  --text-color: #000000;
+  --primary-color: #f0f0f0;
+  --btn-hover-color: #d4d4d4;
+  --btn-click-color: #b9b9b9;
+  /* Add more colors as needed */
 }
 
 a {
@@ -31,34 +52,3 @@ h1 {
   line-height: 1.1;
 }
 
-/* button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
