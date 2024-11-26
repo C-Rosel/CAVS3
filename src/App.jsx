@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import Navbar from './components/navbar/Navbar';
+import Navbar from './components/navbar/Navbar'
 import Sidebar from './components/sidebar/Sidebar'
+import PanelHandler from './components/panels/PanelHandler'
 import './App.css'
 
 
@@ -15,7 +16,7 @@ const App = () => {
 
       {/* Main Content */}
       <div className={`main-content ${sidebarOpen ? 'shifted' : ''}`}>
-        <h1>This is where other stuff will go.</h1>
+        <PanelHandler />
       </div>
     </div>
   );

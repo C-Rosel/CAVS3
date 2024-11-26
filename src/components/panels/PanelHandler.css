@@ -1,0 +1,42 @@
+.panel-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 20px;
+    padding: 20px;
+}
+
+.add-module-button {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.add-module-button:hover {
+    transform: scale(1.1);
+}
+
+.add-module-menu {
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #000000;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    width: 300px;
+}
+
+.module-option {
+    margin-bottom: 8px;
+    cursor: pointer;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
