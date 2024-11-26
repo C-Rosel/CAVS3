@@ -2,21 +2,14 @@ import React, { useState } from 'react'
 import ModulePanel from './ModulePanel'
 import './PanelHandler.css'
 
-
-const PanelHandler = () => {
+/*
+* This component handles module panels.
+* Active modules are panels currently displayed. 
+* Available modules are panels that can be added from the add module menu.
+*/
+const PanelHandler = ({activeModules, setActiveModules, availableModules, setAvailableModules}) => {
     
     const [showMenu, setShowMenu] = useState(false);
-    // Active Module Panels
-    const [activeModules, setActiveModules] = useState([
-        { id: 1, title: 'Weather', content: 'Sunny, 25°C' },
-        { id: 2, title: 'Stock', content: 'AAPL: $150.00' },
-    ]);
-    // Available to add Module Panels
-    const [availableModules, setAvailableModules] = useState([
-        { id: 3, title: 'Task', content: '3 pending tasks' },
-        { id: 4, title: 'Fitness', content: 'Steps: 10,000' },
-        { id: 5, title: 'News', content: 'Top story of the day...' },
-    ]);
 
     const handleAddModule = (module) => {
         setActiveModules([...activeModules, module]); // Add selected module to the dashboard
@@ -40,7 +33,6 @@ const PanelHandler = () => {
                 key={module.id}
                 title={module.title}
                 content={module.content}
-                // onClick={() => handlePanelClick(module.id)}
                 onClose={() => handleRemoveModule(module)}
             />
             ))}          
