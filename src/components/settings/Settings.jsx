@@ -16,7 +16,6 @@ const Settings = ({ settingsOpen }) => {
 
     // Toggle theme between light and dark
     const toggleTheme = () => {
-        console.log("switch")
         setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
     };
     
