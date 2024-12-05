@@ -13,11 +13,13 @@ import './App.css'
 const App = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [activePage, setActivePage] = useState("Camera");
+  const [activePage, setActivePage] = useState("");
 
     // Render the correct component based on activePage
     const renderPage = () => {
       switch (activePage) {
+        case "GPS":
+          return <GPS />;
         case "Camera":
           return <Camera />;
         case "Sensors":
@@ -25,7 +27,7 @@ const App = () => {
         case "Data":
           return <Data />;
         default:
-          return <Camera />; // Default to Camera if activePage is undefined or doesn't match
+          return <GPS />;
       }
     };
 

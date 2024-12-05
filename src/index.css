@@ -19,7 +19,9 @@
   /* Default (Dark Mode) Colors */
   --background-color: #0F0F0F;
   --text-color: white;
+  --text-color-rgb: 255, 255, 255;
   --primary-color: #212121;
+  --primary-color-rgb: 33, 33, 33;
   --btn-hover-color: #383838;
   --btn-click-color: #4a4a4a;
 }
@@ -28,7 +30,9 @@
 [data-theme="light"] {
   --background-color: #c2c2c2;
   --text-color: #000000;
+  --text-color-rgb: 0, 0, 0;
   --primary-color: #f0f0f0;
+  --primary-color-rgb: 240, 240, 240;
   --btn-hover-color: #d4d4d4;
   --btn-click-color: #b9b9b9;
   /* Add more colors as needed */

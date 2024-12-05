@@ -1,0 +1,54 @@
+.main-content {
+    padding: 0 !important;
+}
+
+.map-container {
+    height: 91vh; /* Subtract navbar height */
+    width: 100%;
+}
+
+.leaflet-container {
+    height: 100%;
+    /* margin-right: -260px; */
+}
+
+
+/* Tooltips */
+.map-container .leaflet-container .leaflet-popup-content-wrapper,
+.map-container .leaflet-container .leaflet-popup-tip {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+
+/* Leaflet Controls */
+/* This is for the zoom buttons for now. May need to change if adding more controls later */
+.leaflet-control-zoom a {
+    background-color: var(--primary-color) !important;
+    color: var(--text-color) !important;
+}
+.leaflet-control-zoom a:hover {
+    background-color: var(--btn-hover-color) !important;
+}
+.leaflet-control-zoom a:active {
+    background-color: var(--btn-click-color) !important;
+}
+
+.leaflet-container .leaflet-control-attribution {
+    background-color: rgba(var(--primary-color-rgb), 0.8);
+    color: rgba(var(--text-color-rgb), 0.7);
+}
+
+/* Class has to be hyper-specific here to take priority over leaflet defaults without use !important*/
+.map-container .leaflet-container .leaflet-control-zoom {
+    margin: 20px 0 0 20px;
+}
+.map-container .leaflet-container .leaflet-control-zoom-in,
+.map-container .leaflet-container .leaflet-control-zoom-out {
+    width: 50px; 
+    height: 50px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
