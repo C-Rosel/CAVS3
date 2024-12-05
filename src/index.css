@@ -13,18 +13,23 @@
   -moz-osx-font-smoothing: grayscale;
 
 
-  /* GLOBAL COLORS */
-  --msstate-maroon: #5D1725;
+    /* GLOBAL COLORS */
+    --msstate-maroon: #5D1725;  
+}
 
-  /* Default (Dark Mode) Colors */
+
+/* Default (Dark Mode) Colors */
+[data-theme="dark"] {
   --background-color: #0F0F0F;
   --text-color: white;
   --text-color-rgb: 255, 255, 255;
   --primary-color: #212121;
   --primary-color-rgb: 33, 33, 33;
   --btn-hover-color: #383838;
-  --btn-click-color: #4a4a4a;
+  --btn-click-color: #4a4a4a;  
+  --hyperlink-color: #23a0d1;
 }
+
 
 /* Light Mode Colors */
 [data-theme="light"] {
@@ -35,7 +40,7 @@
   --primary-color-rgb: 240, 240, 240;
   --btn-hover-color: #d4d4d4;
   --btn-click-color: #b9b9b9;
-  /* Add more colors as needed */
+  --hyperlink-color: #0078A8;
 }
 
 a {

@@ -34,9 +34,13 @@
     background-color: var(--btn-click-color) !important;
 }
 
+/* Attribution in bottom right */
 .leaflet-container .leaflet-control-attribution {
     background-color: rgba(var(--primary-color-rgb), 0.8);
     color: rgba(var(--text-color-rgb), 0.7);
+}
+.leaflet-container .leaflet-control-attribution a {
+    color: var(--hyperlink-color);
 }
 
 /* Class has to be hyper-specific here to take priority over leaflet defaults without use !important*/
