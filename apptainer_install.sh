@@ -1,4 +1,4 @@
-# bin/bash!
+#! bin/bash
 
 # This is a set up file for installing Apptainer on Ubuntu 18.04 systems.
 
