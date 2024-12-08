@@ -1,6 +1,7 @@
 import React from 'react'
 import './ToggleSwitch.css'
 
+// Don't ask me what any of this means
 const ToggleSwitch = ({ label, onSwitch }) => {
     return (
         <div className="toggle-switch-container">
