@@ -4,9 +4,6 @@ This is an application to interface with ROS topics running on CAVS vehicles for
 
 # Instructions to run front-end locally
 
-Requirements:
-
-
 ## Requirements
 
 ### Client System
@@ -27,10 +24,8 @@ Requirements:
 
 2. **Navigate to the project directory**
 
-Edit the config.json file located in frontend/public/:
+   Edit the config.json file located in frontend/public/:
 
-   * Update rosMasterIP to the IP of their ROS Master.
-   * Update rosBridgePort to the port rosbridge_suite is using.
    * Add/remove topics and their message types as needed.
    * Restart the container after making changes to the configuration file.
 
@@ -41,6 +36,7 @@ Edit the config.json file located in frontend/public/:
 
 4. **Start rosbridge_suite on the ROS System**
    ```
+   source /opt/ros/noetic/setup.bash
    sudo apt install ros-noetic-rosbridge-server
    roslaunch rosbridge_server rosbridge_websocket.launch
    ```

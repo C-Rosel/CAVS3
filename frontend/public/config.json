@@ -1,6 +1,5 @@
 {
-    "rosMasterIP": "localhost",
-    "rosBridgePort": 9090,
+    "rosbridgeURI": "ws://localhost:9090",
     "topics": [
         {
             "name": "/mavs_ros/cmd_vel",

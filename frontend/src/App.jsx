@@ -18,6 +18,8 @@ const App = () => {
 
   const [ros, setRos] = useState(null); // ROS "backend"
   const [messages, setMessages] = useState([]);
+  const [rosConnected, setRosConnected] = useState(false);
+  const [topics, setTopics] = useState([]);
 
   useEffect(() => {
     // Fetch configuration file at runtime
@@ -31,7 +33,7 @@ const App = () => {
         .then((config) => {
             // Connect to ROS using the configuration
             const rosConnection = new ROSLIB.Ros({
-                url: `ws://${config.rosMasterIP}:${config.rosBridgePort}`,
+                url: `ws://localhost:9090`,
             });
 
             // Handle connection events
