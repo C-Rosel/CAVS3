@@ -1,0 +1,44 @@
+Bootstrap: docker
+From: ubuntu:18.04
+
+%labels
+    Maintainer CAVS3
+
+%environment
+    export ROS_MASTER_URI=http://<ROS_MASTER_IP>:11311
+    export ROS_BRIDGE_WS_URL=ws://<ROS_MASTER_IP>:9090
+
+%post
+    # Install Node.js and npm
+    apt-get update && apt-get install -y \
+        npm \
+        nodejs \
+        curl \
+        build-essential \
+        libssl-dev
+        
+
+    # Install Vite dependencies
+    cd /frontend
+    npm install
+    npm install roslib
+
+%setup
+    # Copy React application into container
+    mkdir -p /frontend
+    cp -r /frontend/* /frontend/
+
+%files
+    frontend /frontend
+
+%startscript
+#!/bin/bash
+# Start the React application
+cd /frontend
+npm run dev --host 0.0.0.0 &
+
+# Wait for the server to start
+sleep 5
+
+# Automatically open the default browser
+xdg-open "http://localhost:5173" || echo "Please open your browser and navigate to http://localhost:5173"

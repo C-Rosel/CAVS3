@@ -1,0 +1,14 @@
+{
+    "rosMasterIP": "localhost",
+    "rosBridgePort": 9090,
+    "topics": [
+        {
+            "name": "/mavs_ros/cmd_vel",
+            "messageType": "geometry_msgs/Twist"
+        },
+        {
+            "name": "/mavs_ros/odometry_true",
+            "messageType": "nav_msgs/Odometry"
+        }
+    ]
+}

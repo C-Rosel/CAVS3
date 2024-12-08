@@ -1,0 +1,114 @@
+/* src/components/navbar/Navbar.css */
+
+/* #region NAVBAR */
+.navbar {
+    max-width: 100%;
+    height: 7vh;
+    background-color: var(--msstate-maroon);
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.navbar-left,
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+.navbar-left * {
+    margin-right: 30px;
+}
+.navbar-right * {
+    margin-left: 30px;
+}
+
+.navbar-logo {
+    width: 80px;
+}
+.navbar-title {
+    font-size: 2.5rem;
+    color: white;
+    text-decoration: none;
+}
+/* #endregion */
+
+
+
+/* #region HAMBURGER ICON */
+.ham-icon {
+    height: 50px;
+    width: 60px;
+    padding: .25rem;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.ham-icon:hover  {
+    transform: scale(1.1);
+}
+
+.ham-icon span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 5px;
+    width: 70%;
+    border-radius: 1rem;
+    background-color: white;
+    transition: .2s ease;
+}
+
+.ham-icon span:nth-child(1) {    
+    top: 25%;
+}
+.ham-icon span:nth-child(2) {    
+    top: 50%;
+}
+.ham-icon span:nth-child(3) {    
+    top: 75%;
+}
+
+
+.ham-icon.active span {
+    background-color: white;
+}
+
+.ham-icon.active span:nth-child(1){
+    transform: translate(-50%, -50%) rotate(-45deg);
+    top: 50%;
+    width: 50%;
+}
+.ham-icon.active span:nth-child(2){
+    opacity: 0;
+}
+.ham-icon.active span:nth-child(3){
+    transform: translate(-50%, -50%) rotate(45deg);
+    top: 50%;
+    width: 50%;
+}
+/* #endregion */
+
+
+
+/* #region SETTINGS ICON */
+.settings-icon {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    margin: 0 -15px;
+    padding: 15px;
+    color: white;
+}
+.settings-icon:hover  {
+    transform: scale(1.1) rotate(90deg);
+}
+/* #endregion */
