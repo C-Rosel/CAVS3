@@ -1,1 +1,0 @@
-# Python requirements for the backend of the appliation go here (?)
