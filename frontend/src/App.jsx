@@ -12,7 +12,7 @@ import ROSLIB from "roslib";
 const App = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [activePage, setActivePage] = useState("Camera");
+  const [activePage, setActivePage] = useState("GPS");
 
   const [ros, setRos] = useState(null);
   const [messages, setMessages] = useState([]);
