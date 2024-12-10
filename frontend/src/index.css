@@ -1,0 +1,63 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+
+    /* GLOBAL COLORS */
+    --msstate-maroon: #5D1725;  
+}
+
+
+/* Default (Dark Mode) Colors */
+[data-theme="dark"] {
+  --background-color: #0F0F0F;
+  --text-color: white;
+  --text-color-rgb: 255, 255, 255;
+  --primary-color: #212121;
+  --primary-color-rgb: 33, 33, 33;
+  --btn-hover-color: #383838;
+  --btn-click-color: #4a4a4a;  
+  --hyperlink-color: #23a0d1;
+}
+
+
+/* Light Mode Colors */
+[data-theme="light"] {
+  --background-color: #c2c2c2;
+  --text-color: #000000;
+  --text-color-rgb: 0, 0, 0;
+  --primary-color: #f0f0f0;
+  --primary-color-rgb: 240, 240, 240;
+  --btn-hover-color: #d4d4d4;
+  --btn-click-color: #b9b9b9;
+  --hyperlink-color: #0078A8;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
