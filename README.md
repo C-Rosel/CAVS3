@@ -1,14 +1,14 @@
-Human-Computer Interactions Project Fall 2025 Team: CAVS 3
+# Human-Computer Interactions Project Fall 2025 Team: CAVS 3
 
-This is an application to interface with ROS topics running on CAVS vehicles for viewing purposes.
+This is an application to interface with ROS topics running on CAVS vehicles for monitoring purposes and showcasing.
 
 # Instructions to run front-end locally
 
 ## Requirements
 
 ### Client System
-- **ROS Version**: ROS 1 Noetic
-- **OS**: Ubuntu 20.04 or compatible
+- **ROS Version**: ROS 1 Melodic
+- **OS**: Ubuntu 18.04 or compatible
 - **Node.js**: Node: v16.20.2 | Npm: 8.19.4 
 - **rosbridge_suite**: Installed and running on the ROS system.
 
@@ -23,6 +23,9 @@ This is an application to interface with ROS topics running on CAVS vehicles for
    ```
 
 2. **Navigate to the project directory**
+   ```
+   cd CAVS3
+   ```
 
    Edit the config.json file located in frontend/public/:
 
@@ -36,8 +39,8 @@ This is an application to interface with ROS topics running on CAVS vehicles for
 
 4. **Start rosbridge_suite on the ROS System**
    ```
-   source /opt/ros/noetic/setup.bash
-   sudo apt install ros-noetic-rosbridge-server
+   source /opt/ros/melodic/setup.bash
+   sudo apt install ros-melodic-rosbridge-server
    roslaunch rosbridge_server rosbridge_websocket.launch
    ```
 
@@ -49,16 +52,16 @@ This is an application to interface with ROS topics running on CAVS vehicles for
 # For Development
 - Navigate to the project's frontend:
    ```
-   cd CAVS3
+   cd CAVS3/frontend
    ```
 - Run Dev:
    ```
-   ./scripts/setup.sh
+   sudo ./../scripts/setup.sh
    ```
 - Install Apptainer and ROS 1 Noetic for testing:
    ```
-   ./scripts/apptainer_install.sh
-   ./scripts/ros-noetic-desktop-full.sh
+   sudo ./../scripts/apptainer_install.sh
+   sudo ./../scripts/ros-melodic-desktop-full.sh
    ```
 
 

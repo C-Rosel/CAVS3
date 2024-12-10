@@ -1,47 +1,52 @@
 Bootstrap: docker
-From: ubuntu:20.04
-
-%labels
-    Maintainer CAVS3
+From: ubuntu:18.04
 
 %post
-    # Update and install required dependencies
+    # Update and install prerequisites
     apt-get update && apt-get install -y \
-        curl \
-        wget \
-        git \
-        build-essential \
-        python3 \
-        python3-pip \
-        ros-noetic-rosbridge-server \
-        nodejs \
-        npm
+        lsb-release gnupg curl wget \
+        build-essential python-pip \
+        xdg-utils \
+        git  # Useful for development workflows
 
-    # Install additional ROS packages
-    . /opt/ros/noetic/setup.sh
-    apt-get install -y \
-        ros-noetic-tf2-web-republisher \
-        ros-noetic-rosauth
+    # Install Node.js and npm (version 16.x for compatibility with Vite)
+    curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
+    apt-get install -y nodejs
 
-    # Set up React app
-    mkdir -p /frontend
-    cd /frontend
-    # Assuming React app is already in the build context
-    cp -r /CAVS3/frontend/* /frontend/
-    npm install
-    npm install roslib
+    # Clean up
+    apt-get clean
+    rm -rf /var/lib/apt/lists/*
 
 %environment
-    export ROS_MASTER_URI="http://localhost:11311"
-    export ROSBRIDGE_SERVER_URI="ws://localhost:9090"
+    export ROS_MASTER_URI=http://localhost:11311
+    export ROS_IP=127.0.0.1
+    export ROS_HOSTNAME=127.0.0.1
 
-%startscript
-    # Start the React app
-    cd /frontend
-    npm run dev --host 0.0.0.0 &
-    
-    # Wait for server to start
+%runscript
+    # Source ROS environment
+    if [ -f "/opt/ros/melodic/setup.bash" ]; then
+        source /opt/ros/melodic/setup.bash
+    else
+        echo "Error: ROS Melodic is not installed on the host system."
+        exit 1
+    fi
+
+    # Verify rosbridge_server is running
+    if ! pgrep -f rosbridge_websocket > /dev/null; then
+        echo "Error: rosbridge_server is not running on the host system."
+        echo "Please start it using:"
+        echo "    roslaunch rosbridge_server rosbridge_websocket.launch"
+        exit 1
+    fi
+
+    # Start the React frontend
+    cd /path/to/frontend
+    npm install  # Ensure dependencies are installed
+    npm run dev &  # Start the Vite dev server
     sleep 5
 
-    # Open browser if local
-    xdg-open "http://localhost:5173" || echo "Open http://localhost:5173 in your browser."
+    # Open the app in the browser
+    xdg-open http://localhost:5173/
+
+    # Keep the container running
+    exec bash

@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#! /bin/bash
+
 set -eu
 
 [[ "$(lsb_release -sc)" == "focal" ]] || exit 1

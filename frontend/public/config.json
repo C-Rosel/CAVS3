@@ -8,6 +8,14 @@
         {
             "name": "/mavs_ros/odometry_true",
             "messageType": "nav_msgs/Odometry"
+        },
+        {
+            "name": "/mavs_ros/image",
+            "messageType": "sensor_msgs/Image"
+        },
+        {
+            "name": "/mavs_ros/imu",
+            "messageType": "sensor_msgs/Imu"
         }
     ]
 }
