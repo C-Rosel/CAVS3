@@ -52,3 +52,45 @@
     justify-content: center;
     align-items: center;
 }
+
+
+/* Waypoint Control */
+.wp-control {
+    background-color: rgba(var(--primary-color-rgb), 0.8);
+    color: rgba(var(--text-color-rgb), 0.7);
+    width: 300px;
+    height: 200px;
+    border-radius: 5px;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.horizontal-separator {
+    border: none;
+    border-top: 2px solid rgba(var(--text-color-rgb), 1);  /* Light separator line */
+    width: 90%;  /* Ensure it spans the full width of the control */
+    margin: 5px 0;  /* Optional: Add some spacing around the separator */
+}
+.speed-data {
+    width: 85%;
+    height: 35%;
+    background-color: rgba(var(--text-color-rgb), 0.7);
+    border-radius: 5px;
+    margin: 5px 0px;
+}
+
+/* Vehicle Controls Control */
+.vh-controls-control {
+    background-color: var(--msstate-maroon);
+    color: var(--text-color);
+    width: 300px;
+    height: 80px;
+    border-radius: 5px;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
