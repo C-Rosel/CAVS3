@@ -121,6 +121,8 @@ const GPS = ({ rosInstance, rosConnected }) => {
   };
 
   const mapPos = [33.4736, -88.7932];
+  const scalingFactor = 0.000001; // Placeholder scaling factor
+  const origin = { x: mapPos[1], y: mapPos[0] }; // Placeholder origin
 
   useEffect(() => {
     if (rosConnected && rosInstance) {
@@ -160,18 +162,24 @@ const GPS = ({ rosInstance, rosConnected }) => {
         messageType: 'nav_msgs/Path',
       });
 
+      const occupancyGridTopic = new ROSLIB.Topic({
+        ros: rosInstance,
+        name: '/nature/occupancy_grid',
+        messageType: 'nav_msgs/OccupancyGrid',
+      });
+
       globalPathTopic.subscribe((message) => {
         const extractedGlobalPath = message.poses.map((pose) => ({
-          x: pose.pose.position.x,
-          y: pose.pose.position.y,
+          x: pose.pose.position.x * scalingFactor + origin.x,
+          y: pose.pose.position.y * scalingFactor + origin.y,
         }));
         setGlobalPath(extractedGlobalPath);
       });
 
       localPathTopic.subscribe((message) => {
         const extractedLocalPath = message.poses.map((pose) => ({
-          x: pose.pose.position.x,
-          y: pose.pose.position.y,
+          x: pose.pose.position.x * scalingFactor + origin.x,
+          y: pose.pose.position.y * scalingFactor + origin.y,
         }));
         setLocalPath(extractedLocalPath);
       });
@@ -193,13 +201,13 @@ const GPS = ({ rosInstance, rosConnected }) => {
 
       waypointsTopic.subscribe((message) => {
         const extractedWaypoints = message.poses.map((pose) => ({
-          x: pose.pose.position.x,
-          y: pose.pose.position.y,
+          x: pose.pose.position.x * scalingFactor + origin.x,
+          y: pose.pose.position.y * scalingFactor + origin.y,
         }));
         setWaypoints(extractedWaypoints);
         setTotalWP(extractedWaypoints.length); // Set total waypoints
       });
-  
+
       imuTopic.subscribe((message) => {
         const { x, y, z } = message.linear_acceleration;
         const acceleration = Math.sqrt(x * x + y * y + z * z).toFixed(3);
@@ -225,6 +233,34 @@ const GPS = ({ rosInstance, rosConnected }) => {
         });
       });
 
+    //   occupancyGridTopic.subscribe((message) => {
+    //     const { resolution, origin } = message.info;
+  
+    //     // Adjust globalPath
+    //     setGlobalPath((prevGlobalPath) =>
+    //       prevGlobalPath.map((point) => ({
+    //         x: point.x * resolution + origin.position.x,
+    //         y: point.y * resolution + origin.position.y,
+    //       }))
+    //     );
+  
+    //     // Adjust localPath
+    //     setLocalPath((prevLocalPath) =>
+    //       prevLocalPath.map((point) => ({
+    //         x: point.x * resolution + origin.position.x,
+    //         y: point.y * resolution + origin.position.y,
+    //       }))
+    //     );
+  
+    //     // Adjust waypoints
+    //     setWaypoints((prevWaypoints) =>
+    //       prevWaypoints.map((point) => ({
+    //         x: point.x * resolution + origin.position.x,
+    //         y: point.y * resolution + origin.position.y,
+    //       }))
+    //     );
+    //   });
+
       return () => {
         distTopic.unsubscribe();
         speedTopic.unsubscribe();
@@ -232,6 +268,7 @@ const GPS = ({ rosInstance, rosConnected }) => {
         imuTopic.unsubscribe();
         globalPathTopic.unsubscribe();
         localPathTopic.unsubscribe();
+        //occupancyGridTopic.unsubscribe();
       };
     }
 }, [rosConnected, rosInstance, waypoints.length, currentWP]);
@@ -271,7 +308,7 @@ const GPS = ({ rosInstance, rosConnected }) => {
         />
       </div>
       <LegendControl /> {/* Place the legend outside the MapContainer */}
-      <MapContainer center={mapPos} zoom={16}>
+      <MapContainer center={mapPos} zoom={25}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
@@ -281,7 +318,7 @@ const GPS = ({ rosInstance, rosConnected }) => {
             <Popup>Waypoint {index + 1}</Popup>
           </Marker>
         ))}
-        <Polyline positions={waypoints.map((wp) => [wp.y, wp.x])} />
+        <Polyline positions={waypoints.map((wp) => [wp.y, wp.x])} color="blue" />
         <Polyline positions={globalPath.map((gp) => [gp.y, gp.x])} color="green" />
         <Polyline positions={localPath.map((lp) => [lp.y, lp.x])} color="red" />
         <Marker position={mapPos}>
