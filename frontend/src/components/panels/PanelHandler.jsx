@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { IoAddSharp } from "react-icons/io5";
+import { IoAddSharp, IoChevronDownSharp, IoChevronForwardSharp  } from "react-icons/io5";
 import ModulePanel from './ModulePanel'
 import './PanelHandler.css'
 
@@ -13,14 +13,19 @@ const PanelHandler = ({ activeModules, setActiveModules, availableModules, setAv
     const [expandedCategories, setExpandedCategories] = useState({}); // Tracks expanded categories
 
     const handleAddModule = (module) => {
-        setActiveModules([...activeModules, module]);
-        setAvailableModules(availableModules.filter((m) => m.id !== module.id));
-        // Don't reset expandedCategories here
+        const newActiveModules = [...activeModules, module].sort((a, b) => a.id - b.id);
+        setActiveModules(newActiveModules);
+
+        const newAvailableModules = availableModules.filter((m) => m.id !== module.id);
+        setAvailableModules(newAvailableModules);
     };
 
     const handleRemoveModule = (module) => {
-        setActiveModules(activeModules.filter((m) => m.id !== module.id));
-        setAvailableModules([...availableModules, module]);
+        const newActiveModules = activeModules.filter((m) => m.id !== module.id);
+        setActiveModules(newActiveModules);
+
+        const newAvailableModules = [...availableModules, module].sort((a, b) => a.id - b.id);
+        setAvailableModules(newAvailableModules);
     };
 
     const toggleCategory = (category) => {
@@ -42,28 +47,41 @@ const PanelHandler = ({ activeModules, setActiveModules, availableModules, setAv
     };
 
     const AddModuleMenu = ({ availableModules }) => {
-        const groupedModules = groupByCategory(availableModules);
+        const groupedModules = groupByCategory(availableModules.sort((a, b) => a.id - b.id));
 
         return (
             <div className="add-module-menu">
+                {/* HEADER */}
                 <div className="mm-header">
                     <h3>Select a Module to Add:</h3>
+                    <button 
+                        className="reactive-btn mm-close-btn" 
+                        onClick={() => {
+                            setShowMenu(false);
+                            setExpandedCategories({}); // Reset categories when menu is closed
+                        }}
+                    >
+                        ✖
+                    </button>
                 </div>
+                {/* BODY */}
                 <div className="mm-body">
+                    {/* If there are any available modules */}
                     {Object.keys(groupedModules).length > 0 ? (
                         <ul style={{ listStyle: "none", padding: 0 }}>
                             {Object.entries(groupedModules).map(([category, modules]) => (
+                                // List each category as a dropdown
                                 <li key={category} className="category-container">
                                     <div
                                         className="category-header"
                                         onClick={() => toggleCategory(category)}
-                                        style={{
-                                            cursor: "pointer",
-                                            padding: "8px",
-                                            fontWeight: "bold",
-                                        }}
                                     >
                                         {category}
+                                        {expandedCategories[category] ? (
+                                            <IoChevronDownSharp />
+                                        ) : (
+                                            <IoChevronForwardSharp />
+                                        )}
                                     </div>
                                     {expandedCategories[category] && (
                                         <ul style={{ listStyle: "none", paddingLeft: "15px" }}>
@@ -82,9 +100,8 @@ const PanelHandler = ({ activeModules, setActiveModules, availableModules, setAv
                             ))}
                         </ul>
                     ) : (
-                        <p>No modules to add</p>
+                        <p className="no-modules">No modules available to add.</p>
                     )}
-                    <button onClick={() => setShowMenu(false)}>Close</button>
                 </div>
             </div>
         );
