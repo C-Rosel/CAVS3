@@ -117,6 +117,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 .link-icon {
     color: white;
@@ -125,7 +126,7 @@
 
 .no-connection-icon {
     position: absolute;
-    top: 15px; /* Adjust to position the overlay icon */
-    right: 120px; /* Adjust to position the overlay icon */
+    top: -5px; /* Adjust to position the overlay icon */
+    right: -4px; /* Adjust to position the overlay icon */
     color: red; /* Example: red for alert icon */
 }
