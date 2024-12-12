@@ -40,8 +40,10 @@ From: ubuntu:18.04
     fi
 
     # Start the React frontend
-    cd /path/to/frontend
+    cd /frontend
     npm install  # Ensure dependencies are installed
+    npm install roslib
+    npm install chart.js react-chartjs-2
     npm run dev &  # Start the Vite dev server
     sleep 5
 
