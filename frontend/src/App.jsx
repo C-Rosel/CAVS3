@@ -14,10 +14,16 @@ import './App.css';
 import ROSLIB from "roslib";
 
 const App = () => {
+  
+  // Component States
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [activePage, setActivePage] = useState("GPS");
 
+  // Variables
+  const [selectedVehicle, setSelectedVehicle] = useState({name: 'Vehicle 1', ip: '0.0.0.1'})
+
+  // Ros States
   const [ros, setRos] = useState(null);
   const [messages, setMessages] = useState([]);
   const [rosConnected, setRosConnected] = useState(false);
@@ -111,13 +117,18 @@ const App = () => {
         setSidebarOpen={setSidebarOpen}
         settingsOpen={settingsOpen}
         setSettingsOpen={setSettingsOpen}
+        vehicleName={selectedVehicle.name}
       />
       <Sidebar
         sidebarOpen={sidebarOpen}
         activePage={activePage}
         setActivePage={setActivePage}
       />
-      <Settings settingsOpen={settingsOpen} />
+      <Settings 
+        settingsOpen={settingsOpen} 
+        selectedVehicle={selectedVehicle}
+        setSelectedVehicle={setSelectedVehicle}
+      />
 
       {/* Main Content */}
       <div className={`main-content ${sidebarOpen ? "sidebar-shifted" : ""} ${settingsOpen ? "settings-shifted" : ""}`}>

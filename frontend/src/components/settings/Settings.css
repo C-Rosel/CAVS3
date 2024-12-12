@@ -10,3 +10,75 @@
 .settings.open {
     right: 0;  /* Slide in to 0 position */
 }
+
+
+
+.vh-label {
+    color: var(--text-color);
+    font-size: 20px;
+    margin-left: 11px;
+}
+
+/* Container for the dropdown */
+.vehicle-dropdown {
+    width: 220px;
+    margin: 20px;
+}
+  
+/* Dropdown header - looks like category header */
+.vh-category-header {
+    background-color: #b9b9b9;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 8px;
+    margin: 0px 10px;
+    font-weight: bold;
+    border: 1px solid rgba(var(--text-color-rgb), 0.3);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Dropdown list */
+.vehicle-options {
+    list-style: none;
+    padding-left: 15px;
+    margin-top: 5px;
+    border: 0px solid rgba(var(--text-color-rgb), 0.3);
+}
+ul.vehicle-options {
+    margin-top: 0px;
+}
+
+/* Each option inside the dropdown */
+.vehicle-option {
+    margin: 0px 10px;
+    cursor: pointer;
+    padding: 8px;
+    padding-left: 12px;
+    border: 0px solid rgba(var(--text-color-rgb), 0.3);
+    border-radius: 0px;
+    background-color: #b9b9b9;
+    color: var(--text-color);
+}
+.vehicle-option:last-child {
+    border-radius: 0 0 5px 5px;
+}
+
+.vh-category-header:hover,
+.vehicle-option:hover {
+    background-color: #aeaeae;
+}
+.vh-category-header:active,
+.vehicle-option:active {
+    background-color: #9f9f9f;
+}
+
+.vehicle-details {
+    color: var(--text-color);
+}
+.vehicle-details p {
+    margin: 5px;
+    margin-left: 11px;
+}
