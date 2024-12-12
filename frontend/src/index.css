@@ -61,3 +61,15 @@ h1 {
   line-height: 1.1;
 }
 
+
+/* Class that makes button grow on hover and shrink on click */
+.reactive-btn {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.reactive-btn:hover  {
+  transform: scale(1.1);
+}
+.reactive-btn:active  {
+  transform: scale(0.9);
+}

@@ -5,12 +5,12 @@ import './Sensors.css'
 const Sensors = () => {
     // Active Module Panels
     const [activeModules, setActiveModules] = useState([
-        { id: 1, title: 'vehicle/lidar1', content: 'Sensor Data...' },
-        { id: 2, title: 'vehicle/lidar2', content: 'Sensor Data...' },
+        { id: 1, title: 'vehicle/lidar1', content: 'Sensor Data...', category: "Sensors" },
+        { id: 2, title: 'vehicle/lidar2', content: 'Sensor Data...', category: "Sensors" },
     ]);
     // Available to add Module Panels
     const [availableModules, setAvailableModules] = useState([
-        { id: 3, title: 'vehicle/lidar3', content: 'Sensor Data...' },
+        { id: 3, title: 'vehicle/lidar3', content: 'Sensor Data...', category: "Sensors" },
     ]);
 
     return (

@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
+// Components
 import Navbar from './components/navbar/Navbar';
 import Sidebar from './components/sidebar/Sidebar';
 import Settings from './components/settings/Settings';
+// Pages
 import GPS from './pages/GPS';
+import Dashboard from './pages/Dashboard';
 import Camera from './pages/Camera';
 import Sensors from './pages/Sensors';
 import Data from './pages/Data';
+
 import './App.css';
 import ROSLIB from "roslib";
 
@@ -87,6 +91,8 @@ const App = () => {
     switch (activePage) {
       case "GPS":
         return <GPS />;
+      case "Dashboard":
+        return <Dashboard />;
       case "Camera":
         return <Camera />;
       case "Sensors":

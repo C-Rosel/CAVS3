@@ -49,11 +49,6 @@
     width: 60px;
     padding: .25rem;
     position: relative;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-.ham-icon:hover  {
-    transform: scale(1.1);
 }
 
 .ham-icon span {
@@ -110,5 +105,8 @@
 }
 .settings-icon:hover  {
     transform: scale(1.1) rotate(90deg);
+}
+.settings-icon:active  {
+    transform: scale(0.9) rotate(90deg);
 }
 /* #endregion */

@@ -19,7 +19,21 @@
     color: var(--text-color);
 }
 
-/* Leaflet Controls */
+
+/* LEAFLET CONTROLS */
+.horizontal-separator {
+    border: none;
+    border-top: 2px solid rgba(var(--text-color-rgb), 1);  /* Light separator line */
+    width: 90%;  /* Ensure it spans the full width of the control */
+    margin: 5px 0;  /* Optional: Add some spacing around the separator */
+}
+.vertical-separator {
+    border: none;
+    border-right: 4px solid rgba(var(--text-color-rgb), 1);  /* Light separator line */
+    height: 60%;  /* Ensure it spans the full width of the control */
+}
+
+/* Zoom Control */
 /* This is for the zoom buttons for now. May need to change if adding more controls later */
 .leaflet-control-zoom a {
     background-color: var(--primary-color) !important;
@@ -31,6 +45,7 @@
 .leaflet-control-zoom a:active {
     background-color: var(--btn-click-color) !important;
 }
+/* Attribution */
 .leaflet-container .leaflet-control-attribution {
     background-color: rgba(var(--primary-color-rgb), 0.8);
     color: rgba(var(--text-color-rgb), 0.7);
@@ -41,7 +56,8 @@
 
 /* Class has to be hyper-specific here to take priority over leaflet defaults without use !important*/
 .map-container .leaflet-container .leaflet-control-zoom {
-    margin: 20px 0 0 20px;
+    margin: 20px;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
 }
 .map-container .leaflet-container .leaflet-control-zoom-in,
 .map-container .leaflet-container .leaflet-control-zoom-out {
@@ -62,16 +78,12 @@
     height: 200px;
     border-radius: 5px;
     font-size: 20px;
+    margin: 20px;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-.horizontal-separator {
-    border: none;
-    border-top: 2px solid rgba(var(--text-color-rgb), 1);  /* Light separator line */
-    width: 90%;  /* Ensure it spans the full width of the control */
-    margin: 5px 0;  /* Optional: Add some spacing around the separator */
 }
 .speed-data {
     width: 85%;
@@ -89,8 +101,18 @@
     height: 80px;
     border-radius: 5px;
     font-size: 20px;
+    margin: 20px;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+.vh-controls-control .vertical-separator {
+    border-right: 4px solid white;
+}
+.vh-controls-control .vhc-btn {
+    color: white;
+    margin: 0px 10px;
+    padding: 10px;
 }

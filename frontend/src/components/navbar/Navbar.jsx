@@ -13,7 +13,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen, settingsOpen, setSettingsOpen }) 
                 <div className="navbar-left">
                     <div
                         onClick={() => setSidebarOpen(!sidebarOpen)}
-                        className={`${sidebarOpen ? "active" : ""} ham-icon`}
+                        className={`${sidebarOpen ? "active" : ""} reactive-btn ham-icon`}
                     >
                         <span></span>
                         <span></span>
@@ -21,7 +21,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen, settingsOpen, setSettingsOpen }) 
                     </div>
 
                     <img src={msstateLogo} alt='Logo' className="navbar-logo"></img>
-                    <span className="navbar-title">Dashboard</span>
+                    <span className="navbar-title">CAVS App</span>
                 </div>
 
                 {/* Left side: Connectivity Info, Settings Icon */}
