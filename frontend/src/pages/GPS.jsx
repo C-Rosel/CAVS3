@@ -24,17 +24,28 @@ const NotifControl = ({ message, isVisible }) => {
   );
 };
 
-const WaypointCntrl = ({ distToNextWP, remainingWP, totalWP, currSpeed }) => {
+const LegendControl = () => {
+    return (
+      <div className={"leaflet-bottom leaflet-left"}>
+        <div className="leaflet-control legend-control">
+          <p><span className="legend-color" style={{ backgroundColor: 'green' }}></span> Global Path</p>
+          <p><span className="legend-color" style={{ backgroundColor: 'red' }}></span> Local Path</p>
+        </div>
+      </div>
+    );
+  };
+  
+const WaypointCntrl = ({ distToNextWP, currentWP, totalWP, currSpeed }) => {
     const container = useMemo(
       () => (
-        <div className="wp-control">
+        <div className='wp-control'>
           <div> Next Waypoint: {distToNextWP.toFixed(2)} m </div>
-          <div> Waypoint: {remainingWP}/{totalWP} </div>
+          <div> Waypoint: {currentWP}/{totalWP} </div>
           <hr className="horizontal-separator" />
-          <div> Current Speed: {currSpeed.toFixed(3)} m/s </div>
+          <div> Current Speed: {currSpeed.toFixed(2)} m/s </div>
         </div>
       ),
-      [distToNextWP, remainingWP, totalWP, currSpeed]
+      [distToNextWP, currentWP, totalWP, currSpeed]
     );
   
     return (
@@ -79,12 +90,12 @@ const VehicleControlsCntrl = ({ onAction }) => {
 
 const GPS = ({ rosInstance, rosConnected }) => {
   const [distToNextWP, setDistToNextWP] = useState(0);
-  const [remainingWP, setRemainingWP] = useState(0);
+  const [currentWP, setCurrentWP] = useState(1); // Start at waypoint 1
   const [totalWP, setTotalWP] = useState(0);
   const [currSpeed, setCurrSpeed] = useState(0);
   const [waypoints, setWaypoints] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0); // Track current waypoint index
-
+  const [globalPath, setGlobalPath] = useState([]); // Global Path
+  const [localPath, setLocalPath] = useState([]); // Local Path
   const [accelerationData, setAccelerationData] = useState({
     labels: [],
     datasets: [
@@ -137,8 +148,41 @@ const GPS = ({ rosInstance, rosConnected }) => {
         messageType: 'sensor_msgs/Imu',
       });
 
+      const globalPathTopic = new ROSLIB.Topic({
+        ros: rosInstance,
+        name: '/nature/global_path',
+        messageType: 'nav_msgs/Path',
+      });
+
+      const localPathTopic = new ROSLIB.Topic({
+        ros: rosInstance,
+        name: '/nature/local_path',
+        messageType: 'nav_msgs/Path',
+      });
+
+      globalPathTopic.subscribe((message) => {
+        const extractedGlobalPath = message.poses.map((pose) => ({
+          x: pose.pose.position.x,
+          y: pose.pose.position.y,
+        }));
+        setGlobalPath(extractedGlobalPath);
+      });
+
+      localPathTopic.subscribe((message) => {
+        const extractedLocalPath = message.poses.map((pose) => ({
+          x: pose.pose.position.x,
+          y: pose.pose.position.y,
+        }));
+        setLocalPath(extractedLocalPath);
+      });
+
       distTopic.subscribe((message) => {
         setDistToNextWP(message.data);
+
+        // Check if the distance to the next waypoint is below a threshold
+        if (message.data < 5 && currentWP < waypoints.length) {
+          setCurrentWP((prevWP) => prevWP + 1); // Increment current waypoint
+        }
       });
 
       speedTopic.subscribe((message) => {
@@ -153,9 +197,9 @@ const GPS = ({ rosInstance, rosConnected }) => {
           y: pose.pose.position.y,
         }));
         setWaypoints(extractedWaypoints);
-        setTotalWP(extractedWaypoints.length); // Dynamically set totalWP
+        setTotalWP(extractedWaypoints.length); // Set total waypoints
       });
-
+  
       imuTopic.subscribe((message) => {
         const { x, y, z } = message.linear_acceleration;
         const acceleration = Math.sqrt(x * x + y * y + z * z).toFixed(3);
@@ -186,24 +230,11 @@ const GPS = ({ rosInstance, rosConnected }) => {
         speedTopic.unsubscribe();
         waypointsTopic.unsubscribe();
         imuTopic.unsubscribe();
+        globalPathTopic.unsubscribe();
+        localPathTopic.unsubscribe();
       };
     }
-  }, [rosConnected, rosInstance]);
-  useEffect(() => {
-    // Ensure remainingWP is calculated based on currentIndex
-    setRemainingWP(totalWP - currentIndex);
-  }, [totalWP, currentIndex]);
-
-  const handleWaypointReached = (index) => {
-    setCurrentIndex(index); // Update to the new waypoint index
-  };
-
-  useEffect(() => {
-    if (waypoints.length > 0) {
-      // Simulate reaching the first waypoint (index 0)
-      handleWaypointReached(0);
-    }
-  }, [waypoints]);
+}, [rosConnected, rosInstance, waypoints.length, currentWP]);
 
   return (
     <div className="map-container">
@@ -239,6 +270,7 @@ const GPS = ({ rosInstance, rosConnected }) => {
           }}
         />
       </div>
+      <LegendControl /> {/* Place the legend outside the MapContainer */}
       <MapContainer center={mapPos} zoom={16}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -250,13 +282,15 @@ const GPS = ({ rosInstance, rosConnected }) => {
           </Marker>
         ))}
         <Polyline positions={waypoints.map((wp) => [wp.y, wp.x])} />
+        <Polyline positions={globalPath.map((gp) => [gp.y, gp.x])} color="green" />
+        <Polyline positions={localPath.map((lp) => [lp.y, lp.x])} color="red" />
         <Marker position={mapPos}>
           <Popup>Center for Advanced Vehicular Systems</Popup>
         </Marker>
         <NotifControl message={notifMessage} isVisible={isNotifVisible} />
         <WaypointCntrl
           distToNextWP={distToNextWP}
-          remainingWP={remainingWP}
+          currentWP={currentWP}
           totalWP={totalWP}
           currSpeed={currSpeed}
         />

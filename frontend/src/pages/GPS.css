@@ -68,7 +68,33 @@
     justify-content: center;
     align-items: center;
 }
-
+/* Path Legend */
+.legend-control {
+    position: absolute;
+    bottom: 120px; /* Adjust to sit above vehicle controls */
+    width: 150px;
+    left: 20px; /* Align with vehicle controls */
+    background-color: rgba(var(--primary-color-rgb), 0.8);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 1000; /* Ensure it appears above the map */
+  }
+  
+  .legend-control p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .legend-color {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+    display: inline-block;
+    border: 1px solid #000;
+  }
+  
 
 /* Waypoint Control */
 .wp-control {
