@@ -121,7 +121,7 @@ const GPS = ({ rosInstance, rosConnected }) => {
   };
 
   const mapPos = [33.4736, -88.7932];
-  const scalingFactor = 0.000001; // Placeholder scaling factor
+  const scalingFactor = 0.00001; // Placeholder scaling factor
   const origin = { x: mapPos[1], y: mapPos[0] }; // Placeholder origin
 
   useEffect(() => {
@@ -308,7 +308,7 @@ const GPS = ({ rosInstance, rosConnected }) => {
         />
       </div>
       <LegendControl /> {/* Place the legend outside the MapContainer */}
-      <MapContainer center={mapPos} zoom={25}>
+      <MapContainer center={mapPos} zoom={17}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"

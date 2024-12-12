@@ -4,14 +4,14 @@ import ROSLIB from 'roslib';
 const Camera = ({ rosInstance, rosConnected }) => {
   const [cameraHeight, setCameraHeight] = useState(0);
   const [cameraWidth, setCameraWidth] = useState(0);
+  const [isCameraActive, setIsCameraActive] = useState(false); // Toggle state for camera
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    console.log('rosConnected:', rosConnected);
-    console.log('rosInstance:', rosInstance);
-    
-    if (rosConnected && rosInstance) {
-      const imageTopic = new ROSLIB.Topic({
+    let imageTopic;
+
+    if (rosConnected && rosInstance && isCameraActive) {
+      imageTopic = new ROSLIB.Topic({
         ros: rosInstance,
         name: 'mavs_ros/image',
         messageType: 'sensor_msgs/Image',
@@ -20,7 +20,7 @@ const Camera = ({ rosInstance, rosConnected }) => {
       imageTopic.subscribe((message) => {
         console.log('Received image message:', message);
         if (message.data && message.height && message.width) {
-          let scaleFactor = 1.5; // Change to increase/decrease rendered camera canvas
+          const scaleFactor = 1.5; // Change to adjust canvas scaling
           drawCanvas(message, canvasRef, scaleFactor);
           setCameraHeight(message.height * scaleFactor);
           setCameraWidth(message.width * scaleFactor);
@@ -28,13 +28,20 @@ const Camera = ({ rosInstance, rosConnected }) => {
           console.error('Invalid message data:', message);
         }
       });
-
-      // Cleanup subscription on component unmount
-      return () => {
-        imageTopic.unsubscribe();
-      };
     }
-  }, [rosConnected, rosInstance]);
+
+    // Cleanup subscription on component unmount or toggle off
+    return () => {
+      if (imageTopic) {
+        imageTopic.unsubscribe();
+        console.log('Camera subscription stopped.');
+      }
+    };
+  }, [rosConnected, rosInstance, isCameraActive]);
+
+  const toggleCamera = () => {
+    setIsCameraActive((prev) => !prev);
+  };
 
   if (!rosConnected) {
     return <div>ROS is not connected. Please check your connection.</div>;
@@ -42,33 +49,33 @@ const Camera = ({ rosInstance, rosConnected }) => {
 
   return (
     <div className="card" id="Camera-card">
-      <h3 className="card-title">Camera from mavs_ros/image</h3>
-      <canvas
-        className="card-img"
-        ref={canvasRef}
-        width={cameraWidth}
-        height={cameraHeight}
-      />
-      {cameraHeight === 0 && cameraWidth === 0 && (
-        <div>Loading camera feed...</div>
+      <h3 className="card-title">Camera</h3>
+      <button onClick={toggleCamera} className="toggle-button">
+        {isCameraActive ? 'Stop Camera' : 'Start Camera'}
+      </button>
+      {isCameraActive && (
+        <canvas
+          className="card-img"
+          ref={canvasRef}
+          width={cameraWidth}
+          height={cameraHeight}
+        />
       )}
+      {!isCameraActive && <div>Camera feed is inactive. Click "Start Camera" to view.</div>}
     </div>
   );
 };
 
 function drawCanvas(message, canvasRef, scale) {
-  const byteArray = new Uint8Array(message.data);
+  // Decode the string into raw bytes
+  const byteArray = Uint8Array.from(atob(message.data), (c) => c.charCodeAt(0));
   const canvas = canvasRef.current;
-  const context = canvas.getContext('2d');
+  const context = canvas.getContext("2d");
 
-  console.log('Drawing canvas with dimensions:', message.width, message.height);
-
-  // Resize canvas
   canvas.width = message.width * scale;
   canvas.height = message.height * scale;
 
   const imageData = context.createImageData(message.width, message.height);
-//   const imageData = new ImageData(byteArray, canvas.width, canvas.height);
   const data = imageData.data;
 
   for (let i = 0; i < byteArray.length; i += 3) {
@@ -76,26 +83,10 @@ function drawCanvas(message, canvasRef, scale) {
     data[canvasIndex] = byteArray[i]; // Red
     data[canvasIndex + 1] = byteArray[i + 1]; // Green
     data[canvasIndex + 2] = byteArray[i + 2]; // Blue
-    data[canvasIndex + 3] = 255; // Alpha, fully opaque
+    data[canvasIndex + 3] = 255; // Alpha
   }
 
-  // First rendering of image
   context.putImageData(imageData, 0, 0);
-
-  // Rerender
-  context.drawImage(
-    canvas,
-    0,
-    0,
-    message.width,
-    message.height,
-    0,
-    0,
-    canvas.width,
-    canvas.height
-  );
-
-  console.log('Canvas drawn successfully');
 }
 
 export default Camera;
