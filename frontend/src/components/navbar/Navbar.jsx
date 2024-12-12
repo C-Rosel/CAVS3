@@ -2,10 +2,10 @@
 
 import React, {useState} from 'react'
 import msstateLogo from '../../assets/msstate-logo.png'
-import { IoSettingsSharp, IoLinkSharp  } from "react-icons/io5";
+import { IoSettingsSharp, IoLinkSharp, IoBanSharp    } from "react-icons/io5";
 import './Navbar.css'
 
-const Navbar = ({ sidebarOpen, setSidebarOpen, settingsOpen, setSettingsOpen, vehicleName }) => {
+const Navbar = ({ sidebarOpen, setSidebarOpen, settingsOpen, setSettingsOpen, vehicleName, rosConnected }) => {
     return (
         <nav className="navbar">
             <div className="navbar-container">
@@ -28,6 +28,13 @@ const Navbar = ({ sidebarOpen, setSidebarOpen, settingsOpen, setSettingsOpen, ve
                 <div className="navbar-right">
                     <div className="vehicle-display">
                         {vehicleName}
+                        {/* Ban Icon if ros is not connected */}
+                        {!rosConnected && (
+                            <IoBanSharp    
+                                className = "no-connection-icon"
+                                size={58}
+                            />                         
+                        )}
                         <IoLinkSharp 
                             className = "link-icon"
                             size={50}

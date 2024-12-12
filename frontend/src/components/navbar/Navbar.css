@@ -111,6 +111,7 @@
 /* #endregion */
 
 
+/* VEHICLE INFO DISPLAY */
 .vehicle-display {
     font-size: 2rem;
     display: flex;
@@ -120,4 +121,11 @@
 .link-icon {
     color: white;
     margin-left: 15px;
+}
+
+.no-connection-icon {
+    position: absolute;
+    top: 15px; /* Adjust to position the overlay icon */
+    right: 120px; /* Adjust to position the overlay icon */
+    color: red; /* Example: red for alert icon */
 }

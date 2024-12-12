@@ -118,6 +118,7 @@ const App = () => {
         settingsOpen={settingsOpen}
         setSettingsOpen={setSettingsOpen}
         vehicleName={selectedVehicle.name}
+        rosConnected={rosConnected}
       />
       <Sidebar
         sidebarOpen={sidebarOpen}

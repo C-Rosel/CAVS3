@@ -116,3 +116,27 @@
     margin: 0px 10px;
     padding: 10px;
 }
+
+
+/* Notification Control */
+.notif-control {
+    transition: margin-right 0.5s ease, opacity 0.8s ease;
+    opacity: 0;
+    height: 50px;
+    width: 350px;
+    margin: 20px;
+    margin-right: -400px; /* Start off-screen */
+    background: var(--primary-color);
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    border-radius: 8px;
+}
+.notif-control.visible {
+    margin-right: 20px;
+    opacity: 1;
+}
+.notif-control p {
+    margin-left: 20px;
+}

@@ -17,6 +17,7 @@
     color: var(--text-color);
     font-size: 20px;
     margin-left: 11px;
+    margin-bottom: 6px;
 }
 
 /* Container for the dropdown */
@@ -31,7 +32,7 @@
     color: var(--text-color);
     cursor: pointer;
     padding: 8px;
-    margin: 4px 10px;
+    margin: 0px 10px;
     font-weight: bold;
     border: 1px solid rgba(var(--text-color-rgb), 0.3);
     border-radius: 4px;
@@ -76,6 +77,7 @@ ul.vehicle-options {
 }
 
 .vehicle-details {
+    margin-top: 10px;
     color: var(--text-color);
 }
 .vehicle-details p {

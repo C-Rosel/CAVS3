@@ -5,14 +5,32 @@ import 'leaflet/dist/leaflet.css';
 import './GPS.css'
 
 
+const NotifControl = ({ message, isVisible }) => {
+  const container = useMemo(
+    () => (
+        <div className={`notif-control ${isVisible ? 'visible' : ''}`}>
+          <p>{message}</p>
+        </div>
+    ),
+    [isVisible],
+  )
+
+  return (
+    <div className={"leaflet-top leaflet-right"}>
+      <div className="leaflet-control">{container}</div>
+    </div>
+  );
+};
+
+
 const WaypointCntrl = ({ distToNextWP, remainingWP, totalWP, currSpeed }) => {
   const container = useMemo(
     () => (
       <div className='wp-control'>
-        <div> Next Waypoint: ${distToNextWP.toFixed(2)} </div>
-        <div> Remaining Waypoints: ${remainingWP}/${totalWP} </div>
+        <div> Next Waypoint: {distToNextWP.toFixed(2)} </div>
+        <div> Remaining Waypoints: {remainingWP}/{totalWP} </div>
         <hr className="horizontal-separator" />
-        <div> Current Speed: ${currSpeed} </div>
+        <div> Current Speed: {currSpeed} </div>
         <div className="speed-data"> </div>    
       </div>
     ),
@@ -26,26 +44,26 @@ const WaypointCntrl = ({ distToNextWP, remainingWP, totalWP, currSpeed }) => {
   );
 };
 
-const VehicleControlsCntrl = () => {
+const VehicleControlsCntrl = ({ onAction }) => {
   const container = useMemo(
     () => (
       <div className='vh-controls-control'>
         <IoPlaySharp
           className="reactive-btn vhc-btn start-btn"
           size={50} 
-          onClick={() => console.log("Vehicle Started.")}
+          onClick={() => onAction("Vehicle Starting...")}
         />
         <div className="vertical-separator"></div>
         <IoPauseSharp 
           className="reactive-btn vhc-btn pause-btn"
           size={50} 
-          onClick={() => console.log("Vehicle Paused.")}
+          onClick={() => onAction("Vehicle Pausing...")}
         />
         <div className="vertical-separator"></div>
         <IoPowerSharp 
           className="reactive-btn vhc-btn shutdown-btn"
           size={50} 
-          onClick={() => console.log("Vehicle Shutting Down.")}
+          onClick={() => onAction("Vehicle Shutting Down...")}
         />
       </div>
     ),
@@ -65,6 +83,17 @@ const GPS = () => {
     const [totalWP, setTotalWP] = useState(0);
     const [currSpeed, setCurrSpeed] = useState(0);
 
+    const [notifMessage, setNotifMessage] = useState('');
+    const [isNotifVisible, setIsNotifVisible] = useState(false);
+    // Function to handle notification
+    const handleAction = (message) => {
+      setNotifMessage(message);
+      setIsNotifVisible(true);
+      setTimeout(() => {
+        setIsNotifVisible(false);
+      }, 3000); // Fade out after 3 seconds
+    };
+
 
     const mapPos = [33.4736, -88.7932]; // Latitude and Longitude
 
@@ -78,13 +107,14 @@ const GPS = () => {
                 <Marker position={mapPos}>
                 <Popup>Center for Advanced Vehicular Systems</Popup>
                 </Marker>
+                <NotifControl message={notifMessage} isVisible={isNotifVisible}/>
                 <WaypointCntrl 
                     distToNextWP={distToNextWP}
                     remainingWP={remainingWP}
                     totalWP={totalWP}
                     currSpeed={currSpeed}
                 />
-                <VehicleControlsCntrl />
+                <VehicleControlsCntrl onAction={handleAction}/>
             </MapContainer>            
         </div>
     );
