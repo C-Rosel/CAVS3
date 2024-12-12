@@ -31,7 +31,7 @@
     color: var(--text-color);
     cursor: pointer;
     padding: 8px;
-    margin: 0px 10px;
+    margin: 4px 10px;
     font-weight: bold;
     border: 1px solid rgba(var(--text-color-rgb), 0.3);
     border-radius: 4px;

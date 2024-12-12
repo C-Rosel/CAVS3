@@ -66,17 +66,17 @@ const GPS = () => {
     const [currSpeed, setCurrSpeed] = useState(0);
 
 
-    const mapPos = [37.7749, -122.4194]; // Latitude and Longitude
+    const mapPos = [33.4736, -88.7932]; // Latitude and Longitude
 
     return (
         <div className="map-container">
-            <MapContainer center={mapPos} zoom={13} >
+            <MapContainer center={mapPos} zoom={16} >
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
                 />
                 <Marker position={mapPos}>
-                <Popup>San Francisco</Popup>
+                <Popup>Center for Advanced Vehicular Systems</Popup>
                 </Marker>
                 <WaypointCntrl 
                     distToNextWP={distToNextWP}
