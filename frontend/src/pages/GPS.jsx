@@ -9,10 +9,10 @@ const WaypointCntrl = ({ distToNextWP, remainingWP, totalWP, currSpeed }) => {
   const container = useMemo(
     () => (
       <div className='wp-control'>
-        <div> Next Waypoint: ${distToNextWP.toFixed(2)} </div>
-        <div> Remaining Waypoints: ${remainingWP}/${totalWP} </div>
+        <div> Next Waypoint: {distToNextWP.toFixed(2)} </div>
+        <div> Remaining Waypoints: {remainingWP}/{totalWP} </div>
         <hr className="horizontal-separator" />
-        <div> Current Speed: ${currSpeed} </div>
+        <div> Current Speed: {currSpeed} </div>
         <div className="speed-data"> </div>    
       </div>
     ),
