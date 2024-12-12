@@ -75,7 +75,7 @@
     background-color: rgba(var(--primary-color-rgb), 0.8);
     color: rgba(var(--text-color-rgb), 0.7);
     width: 300px;
-    height: 200px;
+    height: 150px;
     border-radius: 5px;
     font-size: 20px;
     margin: 20px;
@@ -85,13 +85,21 @@
     justify-content: center;
     align-items: center;
 }
+/*Use this part for acceleration graph*/
 .speed-data {
-    width: 85%;
-    height: 35%;
-    background-color: rgba(var(--text-color-rgb), 0.7);
-    border-radius: 5px;
-    margin: 5px 0px;
+    position: absolute; /* Overlay on the map */
+    color: rgba(var(--text-color-rgb), 0.7);
+    top: 190px; /* Adjust for desired positioning */
+    left: 1200px; /* Adjust for desired positioning */
+    z-index: 1000; /* Ensure it appears above the map */
+    width: 275px; /* Define width */
+    height: 300px; /* Define height */
+    background-color: rgba(var(--primary-color-rgb), 0.8);
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional for better visibility */
 }
+
+
 
 /* Vehicle Controls Control */
 .vh-controls-control {

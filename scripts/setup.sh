@@ -13,5 +13,6 @@ nvm use 16
 
 npm install
 npm install roslib
+npm install chart.js react-chartjs-2
 
 npm run dev
