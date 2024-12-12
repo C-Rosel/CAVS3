@@ -45,6 +45,7 @@
 .leaflet-control-zoom a:active {
     background-color: var(--btn-click-color) !important;
 }
+/* Attribution */
 .leaflet-container .leaflet-control-attribution {
     background-color: rgba(var(--primary-color-rgb), 0.8);
     color: rgba(var(--text-color-rgb), 0.7);
@@ -56,6 +57,7 @@
 /* Class has to be hyper-specific here to take priority over leaflet defaults without use !important*/
 .map-container .leaflet-container .leaflet-control-zoom {
     margin: 20px;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
 }
 .map-container .leaflet-container .leaflet-control-zoom-in,
 .map-container .leaflet-container .leaflet-control-zoom-out {
@@ -77,6 +79,7 @@
     border-radius: 5px;
     font-size: 20px;
     margin: 20px;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -99,6 +102,7 @@
     border-radius: 5px;
     font-size: 20px;
     margin: 20px;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -108,6 +112,7 @@
     border-right: 4px solid white;
 }
 .vh-controls-control .vhc-btn {
+    color: white;
     margin: 0px 10px;
     padding: 10px;
 }

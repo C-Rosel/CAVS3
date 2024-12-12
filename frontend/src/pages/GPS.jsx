@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-// TODO: Add clickable icons to the controls
 import { IoPlaySharp, IoPauseSharp, IoPowerSharp } from "react-icons/io5";
 import 'leaflet/dist/leaflet.css';
 import './GPS.css'
