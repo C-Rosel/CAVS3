@@ -2,10 +2,10 @@
 
 import React, {useState} from 'react'
 import msstateLogo from '../../assets/msstate-logo.png'
-import { IoSettingsSharp } from "react-icons/io5";
+import { IoSettingsSharp, IoLinkSharp  } from "react-icons/io5";
 import './Navbar.css'
 
-const Navbar = ({ sidebarOpen, setSidebarOpen, settingsOpen, setSettingsOpen }) => {
+const Navbar = ({ sidebarOpen, setSidebarOpen, settingsOpen, setSettingsOpen, vehicleName }) => {
     return (
         <nav className="navbar">
             <div className="navbar-container">
@@ -26,6 +26,13 @@ const Navbar = ({ sidebarOpen, setSidebarOpen, settingsOpen, setSettingsOpen }) 
 
                 {/* Left side: Connectivity Info, Settings Icon */}
                 <div className="navbar-right">
+                    <div className="vehicle-display">
+                        {vehicleName}
+                        <IoLinkSharp 
+                            className = "link-icon"
+                            size={50}
+                        />
+                    </div>
                     <IoSettingsSharp 
                         className="settings-icon" 
                         size={45}
