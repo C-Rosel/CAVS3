@@ -13,7 +13,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen, settingsOpen, setSettingsOpen }) 
                 <div className="navbar-left">
                     <div
                         onClick={() => setSidebarOpen(!sidebarOpen)}
-                        className={`${sidebarOpen ? "active" : ""} ham-icon`}
+                        className={`${sidebarOpen ? "active" : ""} reactive-btn ham-icon`}
                     >
                         <span></span>
                         <span></span>

@@ -1,65 +1,63 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 // TODO: Add clickable icons to the controls
-import { IoPlaySharp } from "react-icons/io5";
+import { IoPlaySharp, IoPauseSharp, IoPowerSharp } from "react-icons/io5";
 import 'leaflet/dist/leaflet.css';
 import './GPS.css'
 
 
 const WaypointCntrl = ({ distToNextWP, remainingWP, totalWP, currSpeed }) => {
-    const map = useMap();
-  
-    useEffect(() => {
-      // Create a custom control with HTML content
-      const customControl = L.control({ position: 'bottomright' });
-  
-      customControl.onAdd = () => {
-        const div = L.DomUtil.create('div', 'wp-control');
-        div.innerHTML = 
-            `<div> Next Waypoint: ${distToNextWP.toFixed(2)} </div>
-             <div> Remaining Waypoints: ${remainingWP}/${totalWP} </div>
-             <hr class="horizontal-separator">
-             <div> Current Speed: ${currSpeed} </div>
-             <div class=speed-data> </div>`;
-        return div;
-      };
-  
-      // Add the control to the map
-      customControl.addTo(map);
-  
-      return () => {
-        // Clean up when the component is unmounted
-        customControl.remove();
-      };
-    }, [map, distToNextWP, remainingWP, totalWP, currSpeed]);
-  
-    return null;
+  const container = useMemo(
+    () => (
+      <div className='wp-control'>
+        <div> Next Waypoint: ${distToNextWP.toFixed(2)} </div>
+        <div> Remaining Waypoints: ${remainingWP}/${totalWP} </div>
+        <hr className="horizontal-separator" />
+        <div> Current Speed: ${currSpeed} </div>
+        <div className="speed-data"> </div>    
+      </div>
+    ),
+    [],
+  )
+
+  return (
+    <div className={"leaflet-bottom leaflet-right"}>
+      <div className="leaflet-control">{container}</div>
+    </div>
+  );
 };
 
-const VehicleControlsCntrl = ({ distToNextWP, remainingWP, totalWP, currSpeed }) => {
-    const map = useMap();
-  
-    useEffect(() => {
-      // Create a custom control with HTML content
-      const customControl = L.control({ position: 'bottomleft' });
-  
-      customControl.onAdd = () => {
-        const div = L.DomUtil.create('div', 'vh-controls-control');
-        div.innerHTML = 
-            `<div></div>`;
-        return div;
-      };
-  
-      // Add the control to the map
-      customControl.addTo(map);
+const VehicleControlsCntrl = () => {
+  const container = useMemo(
+    () => (
+      <div className='vh-controls-control'>
+        <IoPlaySharp
+          className="reactive-btn vhc-btn start-btn"
+          size={50} 
+          onClick={() => console.log("Vehicle Started.")}
+        />
+        <div className="vertical-separator"></div>
+        <IoPauseSharp 
+          className="reactive-btn vhc-btn pause-btn"
+          size={50} 
+          onClick={() => console.log("Vehicle Paused.")}
+        />
+        <div className="vertical-separator"></div>
+        <IoPowerSharp 
+          className="reactive-btn vhc-btn shutdown-btn"
+          size={50} 
+          onClick={() => console.log("Vehicle Shutting Down.")}
+        />
+      </div>
+    ),
+    [],
+  )
 
-      return () => {
-        // Clean up when the component is unmounted
-        customControl.remove();
-      };
-    }, [map, distToNextWP]);
-  
-    return null;
+  return (
+    <div className={"leaflet-bottom leaflet-left"}>
+      <div className="leaflet-control">{container}</div>
+    </div>
+  );
 };
 
 const GPS = () => {

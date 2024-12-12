@@ -24,7 +24,7 @@ const PanelHandler = ({activeModules, setActiveModules, availableModules, setAva
 
     return (
         <>
-        <div className="add-module-button" onClick={() => setShowMenu(!showMenu)}>
+        <div className="reactive-btn add-module-button" onClick={() => setShowMenu(!showMenu)}>
             +
         </div>
         <div className='panel-container'>

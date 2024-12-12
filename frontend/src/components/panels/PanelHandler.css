@@ -14,12 +14,7 @@
     justify-content: center;
     align-items: center;
     font-size: 50px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
     color: var(--text-color);
-}
-.add-module-button:hover {
-    transform: scale(1.1);
 }
 
 .add-module-menu {
