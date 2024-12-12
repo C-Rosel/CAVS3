@@ -16,7 +16,7 @@ const WaypointCntrl = ({ distToNextWP, remainingWP, totalWP, currSpeed }) => {
         <div className="speed-data"> </div>    
       </div>
     ),
-    [],
+    [distToNextWP, remainingWP, totalWP, currSpeed],
   )
 
   return (
