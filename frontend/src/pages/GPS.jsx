@@ -35,7 +35,7 @@ const LegendControl = () => {
     );
   };
   
-const WaypointCntrl = ({ distToNextWP, currentWP, totalWP, currSpeed }) => {
+const WaypointCntrl = ({ distToNextWP, currentWP, totalWP, currSpeed, accelerationData }) => {
     const container = useMemo(
       () => (
         <div className='wp-control'>
@@ -43,9 +43,41 @@ const WaypointCntrl = ({ distToNextWP, currentWP, totalWP, currSpeed }) => {
           <div> Waypoint: {currentWP}/{totalWP} </div>
           <hr className="horizontal-separator" />
           <div> Current Speed: {currSpeed.toFixed(2)} m/s </div>
+          <div className="speed-data">
+            <Line
+                data={accelerationData}
+                options={{
+                  maintainAspectRatio: false,
+                  responsive: true,
+                  scales: {
+                    x: {
+                      ticks: {
+                        display: false, // Hide timestamps
+                      },
+                    },
+                    y: {
+                      title: {
+                        display: true,
+                        text: 'Acceleration (m/s²)',
+                      },
+                      ticks: {
+                        color: 'white',
+                      },
+                    },
+                  },
+                  plugins: {
+                    legend: {
+                      labels: {
+                        color: 'white', // Legend text color
+                      },
+                    },
+                  },
+                }}
+              />
+            </div>
         </div>
       ),
-      [distToNextWP, currentWP, totalWP, currSpeed]
+      [distToNextWP, currentWP, totalWP, currSpeed, accelerationData]
     );
   
     return (
@@ -275,39 +307,6 @@ const GPS = ({ rosInstance, rosConnected }) => {
 
   return (
     <div className="map-container">
-      <div className="speed-data">
-      <Line
-          data={accelerationData}
-          options={{
-            maintainAspectRatio: false,
-            responsive: true,
-            scales: {
-              x: {
-                ticks: {
-                  display: false, // Hide timestamps
-                },
-              },
-              y: {
-                title: {
-                  display: true,
-                  text: 'Acceleration (m/s²)',
-                },
-                ticks: {
-                  color: 'white',
-                },
-              },
-            },
-            plugins: {
-              legend: {
-                labels: {
-                  color: 'white', // Legend text color
-                },
-              },
-            },
-          }}
-        />
-      </div>
-      <LegendControl /> {/* Place the legend outside the MapContainer */}
       <MapContainer center={mapPos} zoom={25}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -324,12 +323,14 @@ const GPS = ({ rosInstance, rosConnected }) => {
         <Marker position={mapPos}>
           <Popup>Center for Advanced Vehicular Systems</Popup>
         </Marker>
+        <LegendControl />
         <NotifControl message={notifMessage} isVisible={isNotifVisible} />
         <WaypointCntrl
           distToNextWP={distToNextWP}
           currentWP={currentWP}
           totalWP={totalWP}
           currSpeed={currSpeed}
+          accelerationData={accelerationData}
         />
         <VehicleControlsCntrl onAction={handleAction} />
       </MapContainer>
