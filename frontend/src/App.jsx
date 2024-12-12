@@ -26,6 +26,7 @@ const App = () => {
   // Ros States
   const [ros, setRos] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [rosInstance, setRosInstance] = useState(null);
   const [rosConnected, setRosConnected] = useState(false);
   const [topics, setTopics] = useState([]);
 
@@ -45,6 +46,7 @@ const App = () => {
         rosInstance = new ROSLIB.Ros({
           url: config.url || "ws://localhost:9090",
         });
+        setRosInstance(rosInstance);
 
         // Connection Events
         rosInstance.on("connection", () => {
@@ -70,7 +72,7 @@ const App = () => {
           });
 
           topic.subscribe((message) => {
-            console.log(`Received message on ${topicConfig.name}:`, message);
+            //console.log(`Received message on ${topicConfig.name}:`, message);
             setMessages((prevMessages) => [
               ...prevMessages,
               { topic: topicConfig.name, message },
@@ -96,17 +98,17 @@ const App = () => {
   const renderPage = () => {
     switch (activePage) {
       case "GPS":
-        return <GPS />;
+        return <GPS rosInstance={rosInstance} rosConnected={rosConnected} />
       case "Dashboard":
-        return <Dashboard />;
+        return <Dashboard rosInstance={rosInstance} rosConnected={rosConnected} />
       case "Camera":
-        return <Camera />;
+        return <Camera rosInstance={rosInstance} rosConnected={rosConnected} />
       case "Sensors":
-        return <Sensors />;
+        return <Sensors rosInstance={rosInstance} rosConnected={rosConnected} />;
       case "Data":
-        return <Data />;
+        return <Data rosInstance={rosInstance} rosConnected={rosConnected} />;
       default:
-        return <GPS />;
+        return <Dashboard rosInstance={rosInstance} rosConnected={rosConnected} />;
     }
   };
 
@@ -139,4 +141,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default App

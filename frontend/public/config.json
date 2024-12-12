@@ -2,12 +2,12 @@
     "rosbridgeURI": "ws://localhost:9090",
     "topics": [
         {
-            "name": "/mavs_ros/cmd_vel",
-            "messageType": "geometry_msgs/Twist"
+            "name": "/mavs_ros/anim_poses",
+            "messageType": "geometry_msgs/PoseArray"
         },
         {
-            "name": "/mavs_ros/odometry_true",
-            "messageType": "nav_msgs/Odometry"
+            "name": "/mavs_ros/cmd_vel",
+            "messageType": "geometry_msgs/Twist"
         },
         {
             "name": "/mavs_ros/image",
@@ -16,6 +16,66 @@
         {
             "name": "/mavs_ros/imu",
             "messageType": "sensor_msgs/Imu"
+        },
+        {
+            "name": "/mavs_ros/odometry_true",
+            "messageType": "nav_msgs/Odometry"
+        },
+        {
+            "name": "/nature/cmd_vel",
+            "messageType": "geometry_msgs/Twist"
+        },
+        {
+            "name": "/nature/current_waypoint",
+            "messageType": "std_msgs/Int32"
+        },
+        {
+            "name": "/nature/distance_to_current_waypoint",
+            "messageType": "std_msgs/Float64"
+        },
+        {
+            "name": "/nature/global_path",
+            "messageType": "nav_msgs/Path"
+        },
+        {
+            "name": "/nature/local_path",
+            "messageType": "nav_msgs/Path"
+        },
+        {
+            "name": "/nature/occupancy_grid",
+            "messageType": "nav_msgs/OccupancyGrid"
+        },
+        {
+            "name": "/nature/odometry",
+            "messageType": "nav_msgs/Odometry"
+        },
+        {
+            "name": "/nature/points",
+            "messageType": "sensor_msgs/PointCloud2"
+        },
+        {
+            "name": "/nature/state",
+            "messageType": "std_msgs/Int32"
+        },
+        {
+            "name": "/nature/waypoints",
+            "messageType": "nav_msgs/Path"
+        },
+        {
+            "name": "/rosout",
+            "messageType": "rosgraph_msgs/Log"
+        },
+        {
+            "name": "/rosout_agg",
+            "messageType": "rosgraph_msgs/Log"
+        },
+        {
+            "name": "/tf",
+            "messageType": "tf2_msgs/TFMessage"
+        },
+        {
+            "name": "/tf_static",
+            "messageType": "tf2_msgs/TFMessage"
         }
     ]
 }
